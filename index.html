@@ -23,7 +23,7 @@
         </header>
 
         <main>
-            <a href="https://wa.me/56942657719?text=Hola%20Saúl,%20vengo%20de%20Instagram%20y%20necesito%20una%20cotización%20inmediata." class="btn btn-primary animate-pop">
+            <a href="javascript:void(0)" onclick="trackLead('Cotización General', '56942657719', 'Hola Saúl, vengo de Instagram y necesito una cotización inmediata.')" class="btn btn-primary animate-pop">
                 <div class="icon">🟢</div>
                 <div class="text">
                     <strong>¡Cotiza por WhatsApp!</strong>
@@ -31,7 +31,7 @@
                 </div>
             </a>
 
-            <a href="https://wa.me/56942657719?text=Hola%20Saúl,%20me%20interesa%20la%20Mantención%20Express%20para%20un%20departamento." class="btn btn-glass">
+            <a href="javascript:void(0)" onclick="trackLead('Mantención Deptos', '56942657719', 'Hola Saúl, me interesa la Mantención Express para un departamento.')" class="btn btn-glass">
                 <div class="icon">🏙️</div>
                 <div class="text">
                     <strong>Mantención Express Deptos</strong>
@@ -39,19 +39,11 @@
                 </div>
             </a>
 
-            <a href="https://wa.me/56942657719?text=Hola%20Saúl,%20quiero%20información%20sobre%20la%20construcción%20de%20casas." class="btn btn-glass">
+            <a href="javascript:void(0)" onclick="trackLead('Construcción Casas', '56942657719', 'Hola Saúl, quiero información sobre la construcción de casas.')" class="btn btn-glass">
                 <div class="icon">🏠</div>
                 <div class="text">
                     <strong>Construcción de Casas</strong>
                     <span>Madera & Panel SIP</span>
-                </div>
-            </a>
-
-            <a href="https://wa.me/56942657719?text=Hola%20Saúl,%20necesito%20información%20sobre%20proyectos%20industriales." class="btn btn-glass">
-                <div class="icon">🏗️</div>
-                <div class="text">
-                    <strong>Industria & Locales</strong>
-                    <span>Proyectos Especiales</span>
                 </div>
             </a>
 
@@ -68,5 +60,29 @@
             <p>&copy; 2026 @saul_el_constructor | Santiago, Chile</p>
         </footer>
     </div>
+
+    <script>
+        function trackLead(servicio, phone, message) {
+            const webhookUrl = "TU_WEBHOOK_DE_N8N_AQUI"; // Reemplaza esto con tu URL de n8n
+            const waUrl = `https://wa.me/${phone}?text=${encodeURIComponent(message)}`;
+            
+            // Enviamos el lead a n8n en segundo plano
+            fetch(webhookUrl, {
+                method: 'POST',
+                mode: 'no-cors',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    servicio: servicio,
+                    fecha: new Date().toISOString(),
+                    origen: 'Instagram Bio'
+                })
+            });
+
+            // Redirigimos a WhatsApp inmediatamente
+            setTimeout(() => {
+                window.location.href = waUrl;
+            }, 100);
+        }
+    </script>
 </body>
 </html>
