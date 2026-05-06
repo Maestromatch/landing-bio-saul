@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Catálogo de Servicios | Saúl el Constructor</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        .catalog-card {
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            padding: 30px;
+            margin-bottom: 20px;
+            text-align: left;
+            backdrop-filter: blur(10px);
+        }
+        .catalog-card h2 { color: var(--primary-color); margin-bottom: 10px; font-size: 1.4rem; }
+        .price-tag { font-size: 1.8rem; font-weight: 700; color: #fff; margin: 10px 0; }
+        .details { font-size: 0.9rem; opacity: 0.8; line-height: 1.6; }
+        .back-btn { display: inline-block; margin-top: 20px; color: var(--primary-color); text-decoration: none; font-weight: 600; }
+    </style>
+</head>
+<body>
+    <div class="background-overlay"></div>
+    <div class="container">
+        <header>
+            <h1>Catálogo de Servicios</h1>
+            <p class="tagline">Calidad Garantizada en Santiago</p>
+        </header>
+
+        <main>
+            <div class="catalog-card">
+                <h2>Construcción Panel SIP</h2>
+                <p class="details">Viviendas de alta eficiencia térmica y rapidez de entrega.</p>
+                <div class="price-tag">$650.000 <small>/ m²</small></div>
+                <p class="details">✅ Llave en mano<br>✅ Aislación superior<br>✅ Diseño moderno</p>
+            </div>
+
+            <div class="catalog-card">
+                <h2>Mantención Express</h2>
+                <p class="details">Reparaciones críticas en departamentos y casas en menos de 24h.</p>
+                <div class="price-tag">Desde $85.000</div>
+                <p class="details">✅ Santiago RM<br>✅ Personal calificado<br>✅ Garantía técnica</p>
+            </div>
+
+            <div class="catalog-card">
+                <h2>Remodelaciones</h2>
+                <p class="details">Transformamos tu cocina, baño o living con acabados de lujo.</p>
+                <div class="price-tag">Desde $1.200.000</div>
+                <p class="details">✅ Diseño 3D incluido<br>✅ Ejecución rápida<br>✅ Limpieza post-obra</p>
+            </div>
+
+            <a href="index.html" class="back-btn">← Volver al inicio</a>
+        </main>
+    </div>
+</body>
+</html>
