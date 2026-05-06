@@ -63,7 +63,7 @@
 
     <script>
         function trackLead(servicio, phone, message) {
-            const webhookUrl = "https://saaul.app.n8n.cloud/webhook-test/lead-capture"; 
+            const webhookUrl = "https://saaul.app.n8n.cloud/webhook/lead-capture"; 
             const waUrl = `https://wa.me/${phone}?text=${encodeURIComponent(message)}`;
             
             // Enviamos el lead a n8n en segundo plano
