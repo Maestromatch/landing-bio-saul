@@ -9,6 +9,26 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600&display=swap" rel="stylesheet">
     <meta name="description" content="Especialistas en construcción de casas, remodelaciones y mantención express en Santiago RM. Proyectos premium y garantizados.">
+    <style>
+        /* Mejoras visuales del formulario */
+        #lead-form input::placeholder,
+        #lead-form textarea::placeholder {
+            color: rgba(255, 255, 255, 0.5);
+        }
+        #lead-form input:focus,
+        #lead-form textarea:focus {
+            outline: 2px solid #00ff88;
+            background: rgba(255, 255, 255, 0.15) !important;
+        }
+        #lead-form button:hover:not(:disabled) {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(0, 255, 136, 0.3);
+        }
+        #lead-form button:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+    </style>
 </head>
 <body>
     <div class="background-overlay"></div>
@@ -73,14 +93,46 @@
                 </div>
             </a>
 
-            <a href="https://www.tiktok.com/@constructorsaul" class="btn btn-glass">
-                <div class="icon">📱</div>
-                <div class="text">
-                    <strong>Sígueme en TikTok</strong>
-                    <span>Mira nuestras obras</span>
+            <!-- Sección de Precios Referenciales -->
+            <section class="pricing-preview" style="margin-top: 40px; text-align: left;">
+                <h2 style="margin-bottom: 20px; font-size: 1.3rem; color: #fff; text-align: center;">Servicios & Precios Referenciales</h2>
+                
+                <div class="pricing-grid" style="display: grid; grid-template-columns: 1fr; gap: 15px;">
+                    <!-- Casas -->
+                    <div style="background: rgba(255, 255, 255, 0.05); padding: 20px; border-radius: 15px; border: 1px solid rgba(0, 255, 136, 0.2);">
+                        <h3 style="color: #00ff88; font-size: 1.1rem; margin-bottom: 5px;">🏗️ Construcción de Casas</h3>
+                        <p style="font-size: 0.75rem; color: rgba(255,255,255,0.7); margin-bottom: 10px;">Panel SIP • Estructura Metálica • Personalizados</p>
+                        <div style="font-size: 1.2rem; font-weight: 700; color: #fff;">Desde $450.000 / m²</div>
+                    </div>
+
+                    <!-- Mantenciones -->
+                    <div style="background: rgba(255, 255, 255, 0.05); padding: 20px; border-radius: 15px; border: 1px solid rgba(255, 255, 255, 0.1);">
+                        <h3 style="color: #fff; font-size: 1.1rem; margin-bottom: 5px;">⚡ Mantención & Emergencias</h3>
+                        <p style="font-size: 0.75rem; color: rgba(255,255,255,0.7); margin-bottom: 10px;">Deptos & Casas • Santiago RM • Disponibilidad 24h</p>
+                        <div style="font-size: 1.2rem; font-weight: 700; color: #fff;">Desde $85.000</div>
+                    </div>
                 </div>
-            </a>
+
+                <p style="font-size: 0.7rem; color: rgba(255,255,255,0.5); margin-top: 15px; text-align: center; line-height: 1.4;">
+                    *Valores referenciales. El presupuesto final varía según ubicación, tiempo de traslado y viáticos (para regiones).
+                </p>
+            </section>
+
+            <section class="contact-form-section" style="margin-top: 30px; padding: 20px; background: rgba(0, 255, 136, 0.05); border-radius: 20px; border: 1px solid rgba(0, 255, 136, 0.3);">
+                <h2 style="margin-bottom: 8px; font-size: 1.3rem; color: #fff; text-align: center;">Cotiza tu obra en 30 segundos</h2>
+                <p style="font-size: 0.8rem; color: rgba(255,255,255,0.7); text-align: center; margin-bottom: 20px;">Te respondemos por WhatsApp al instante</p>
+                <form id="lead-form" style="display: flex; flex-direction: column; gap: 15px;">
+                    <input type="text" id="nombre" placeholder="Tu Nombre" required style="padding: 12px; border-radius: 10px; border: none; background: rgba(255, 255, 255, 0.1); color: #fff; font-family: 'Outfit', sans-serif;">
+                    <input type="tel" id="telefono" placeholder="WhatsApp (Ej: +569 1234 5678)" required style="padding: 12px; border-radius: 10px; border: none; background: rgba(255, 255, 255, 0.1); color: #fff; font-family: 'Outfit', sans-serif;">
+                    <textarea id="mensaje" placeholder="Cuéntame qué necesitas (ej: casa nueva 80m2 en Lanco, ampliación, remodelación...)" required style="padding: 12px; border-radius: 10px; border: none; background: rgba(255, 255, 255, 0.1); color: #fff; font-family: 'Outfit', sans-serif; min-height: 80px;"></textarea>
+                    <button type="submit" style="padding: 15px; border-radius: 12px; border: none; background: linear-gradient(135deg, #00ff88 0%, #00bd68 100%); color: #000; font-weight: 600; cursor: pointer; transition: transform 0.2s, box-shadow 0.2s;">
+                        Cotizar Mi Proyecto Ahora →
+                    </button>
+                    <p style="font-size: 0.65rem; color: rgba(255,255,255,0.5); text-align: center;">Recibirás un mensaje por WhatsApp en menos de 1 minuto.</p>
+                </form>
+            </section>
         </main>
+
 
         <footer>
             <p>&copy; 2026 @saul_el_constructor | Santiago, Chile</p>
@@ -88,26 +140,111 @@
     </div>
 
     <script>
+        // ============================================
+        // FORMULARIO DE COTIZACIÓN (envía a n8n)
+        // ============================================
+        document.getElementById('lead-form').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            const btn = e.target.querySelector('button');
+            const originalText = btn.innerText;
+            btn.innerText = 'Enviando...';
+            btn.disabled = true;
+
+            // Limpia el teléfono: deja solo números y normaliza al formato chileno
+            let tel = document.getElementById('telefono').value.replace(/\D/g, '');
+            if (tel.startsWith('9') && tel.length === 9) tel = '56' + tel;
+            if (tel.length === 8) tel = '569' + tel; // por si solo escriben los últimos 8
+
+            const nombre = document.getElementById('nombre').value.trim();
+            const mensaje = document.getElementById('mensaje').value.trim();
+
+            const formData = {
+                nombre: nombre,
+                telefono: tel,
+                mensaje: mensaje,
+                fecha: new Date().toISOString(),
+                origen: 'Landing Vercel - Formulario'
+            };
+
+            // Validación rápida del teléfono
+            if (tel.length < 11 || !tel.startsWith('56')) {
+                showFeedback('error', '⚠️ Revisa tu número de WhatsApp. Debe ser un celular chileno (9 dígitos después del 56).');
+                btn.innerText = originalText;
+                btn.disabled = false;
+                return;
+            }
+
+            try {
+                const response = await fetch('https://saaul.app.n8n.cloud/webhook/constructor-saul-lead', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(formData)
+                });
+
+                if (response.ok) {
+                    showFeedback('success', '✅ ¡Listo ' + nombre + '! Revisa tu WhatsApp en los próximos 30 segundos.');
+                    e.target.reset();
+                } else {
+                    throw new Error('Server error');
+                }
+            } catch (error) {
+                showFeedback('error', '⚠️ Hubo un problema. Escríbenos directo al +569 4265 7719');
+            } finally {
+                btn.innerText = originalText;
+                btn.disabled = false;
+            }
+        });
+
+        // ============================================
+        // MENSAJE VISUAL DE FEEDBACK
+        // ============================================
+        function showFeedback(type, message) {
+            let box = document.getElementById('feedback-box');
+            if (!box) {
+                box = document.createElement('div');
+                box.id = 'feedback-box';
+                box.style.cssText = `
+                    position: fixed; top: 20px; left: 50%; transform: translateX(-50%);
+                    padding: 16px 24px; border-radius: 12px; font-family: 'Outfit', sans-serif;
+                    font-weight: 600; max-width: 90%; text-align: center; z-index: 9999;
+                    box-shadow: 0 10px 40px rgba(0,0,0,0.4); transition: opacity 0.3s;
+                    font-size: 0.95rem; line-height: 1.4;
+                `;
+                document.body.appendChild(box);
+            }
+            box.style.background = type === 'success' 
+                ? 'linear-gradient(135deg, #00ff88, #00bd68)' 
+                : '#ff5252';
+            box.style.color = type === 'success' ? '#000' : '#fff';
+            box.innerText = message;
+            box.style.opacity = '1';
+            setTimeout(() => { box.style.opacity = '0'; }, 6000);
+        }
+
+        // ============================================
+        // BOTONES DE WHATSAPP DIRECTO
+        // (Captura el lead Y abre WhatsApp)
+        // ============================================
         function trackLead(servicio, phone, message) {
-            const webhookUrl = "https://saaul.app.n8n.cloud/webhook/lead-capture"; 
             const waUrl = `https://wa.me/${phone}?text=${encodeURIComponent(message)}`;
             
-            // Enviamos el lead a n8n en segundo plano
-            fetch(webhookUrl, {
+            // Envía el lead a n8n al MISMO webhook con datos del botón
+            fetch('https://saaul.app.n8n.cloud/webhook/constructor-saul-lead', {
                 method: 'POST',
                 mode: 'no-cors',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
+                    nombre: 'Cliente Bio - ' + servicio,
+                    telefono: phone,
+                    mensaje: message,
                     servicio: servicio,
                     fecha: new Date().toISOString(),
-                    origen: 'Instagram Bio'
+                    origen: 'Botón Landing - ' + servicio
                 })
             });
 
-            // Redirigimos a WhatsApp inmediatamente
-            setTimeout(() => {
-                window.location.href = waUrl;
-            }, 100);
+            // Abre WhatsApp inmediatamente
+            setTimeout(() => { window.location.href = waUrl; }, 100);
         }
     </script>
 </body>
