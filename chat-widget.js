@@ -90,8 +90,12 @@
     'background:#22BED6;color:#fff;font-size:10px;font-weight:700;display:none;',
     'align-items:center;justify-content:center;border:2px solid ' + INK + '}',
 
-    /* Responsive */
-    '@media(max-width:420px){#cs-panel{width:calc(100vw - 32px);right:-8px;height:480px}}'
+    /* Responsive — widget va a la izquierda en móvil para no tapar botón CTA */
+    '@media(max-width:480px){',
+    '#cs-widget{bottom:16px;right:auto;left:16px}',
+    '#cs-panel{width:calc(100vw - 32px);right:auto;left:0;height:480px}',
+    '#cs-badge{right:auto;left:-4px}',
+    '}'
   ].join('');
 
   var styleEl = document.createElement('style');

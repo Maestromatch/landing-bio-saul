@@ -101,8 +101,15 @@ module.exports = async function handler(req, res) {
 
   // Fallback si faltan vars (evita crash en preview sin configurar)
   if (!SUPABASE_URL || !SUPABASE_SERVICE_KEY || !OPENAI_API_KEY) {
+    const missing = [
+      !SUPABASE_URL && 'SUPABASE_URL',
+      !SUPABASE_SERVICE_KEY && 'SUPABASE_SERVICE_KEY',
+      !OPENAI_API_KEY && 'OPENAI_API_KEY',
+    ].filter(Boolean).join(', ');
+    console.error('[chat.js] Missing env vars:', missing);
     return res.status(200).json({
-      reply: '¡Hola! Por ahora puedes contactarnos directamente: WhatsApp +56 9 4265 7719 o al correo saul.constructor25@gmail.com'
+      reply: '¡Hola! Por ahora puedes contactarnos directamente: WhatsApp +56 9 4265 7719 o al correo saul.constructor25@gmail.com',
+      _debug_missing: missing,
     });
   }
 
