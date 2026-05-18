@@ -6,7 +6,7 @@
 (function () {
   'use strict';
 
-  var ENDPOINT = 'https://saaul.app.n8n.cloud/webhook/webchat-saul';
+  var ENDPOINT = '/api/chat';
   var GRAD = 'linear-gradient(135deg, #22BED6 0%, #176FC9 50%, #1432B5 100%)';
   var INK = '#0F1216';
   var INK2 = '#14181F';
