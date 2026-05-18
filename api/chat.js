@@ -92,18 +92,20 @@ module.exports = async function handler(req, res) {
 
   const {
     SUPABASE_URL,
-    SUPABASE_SERVICE_KEY,
+    SUPABASE_SERVICE_ROLE_KEY,
     OPENAI_API_KEY,
     META_PHONE_NUMBER_ID,
     META_API_TOKEN,
-    SAUL_NOTIFY_WA,  // número de Saúl para notificaciones, ej: 56968171774
+    SAUL_NOTIFY_WA,
   } = process.env;
+
+  const SUPABASE_SERVICE_KEY = SUPABASE_SERVICE_ROLE_KEY;
 
   // Fallback si faltan vars (evita crash en preview sin configurar)
   if (!SUPABASE_URL || !SUPABASE_SERVICE_KEY || !OPENAI_API_KEY) {
     const missing = [
       !SUPABASE_URL && 'SUPABASE_URL',
-      !SUPABASE_SERVICE_KEY && 'SUPABASE_SERVICE_KEY',
+      !SUPABASE_SERVICE_KEY && 'SUPABASE_SERVICE_ROLE_KEY',
       !OPENAI_API_KEY && 'OPENAI_API_KEY',
     ].filter(Boolean).join(', ');
     console.error('[chat.js] Missing env vars:', missing);
