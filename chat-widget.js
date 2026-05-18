@@ -183,19 +183,39 @@
   }
 
   /* ── Toggle ─────────────────────────────────────────────── */
-  function togglePanel() {
-    open = !open;
-    panel.classList.toggle('cs-hidden', !open);
-    btn.setAttribute('aria-expanded', open);
+  function openPanel() {
+    if (open) return;
+    open = true;
+    panel.classList.remove('cs-hidden');
+    btn.setAttribute('aria-expanded', 'true');
     badge.style.display = 'none';
+    if (!msgs.children.length) {
+      addMsg('¡Hola! Soy el asistente de Constructor Saúl SpA. ¿En qué te puedo ayudar?\n\n(remodelación, ampliación, emergencia, construcción nueva, obra menor)', 'bot');
+    }
+    setTimeout(function() { inp.focus(); }, 150);
+  }
+
+  function togglePanel() {
     if (open) {
-      // Show greeting on first open
-      if (!msgs.children.length) {
-        addMsg('¡Hola! Soy el asistente de Constructor Saúl SpA. ¿En qué te puedo ayudar?\n\n(remodelación, ampliación, emergencia, construcción nueva, obra menor)', 'bot');
-      }
-      setTimeout(function() { inp.focus(); }, 150);
+      open = false;
+      panel.classList.add('cs-hidden');
+      btn.setAttribute('aria-expanded', 'false');
+    } else {
+      openPanel();
     }
   }
+
+  /* API pública — llamar desde botones de la landing */
+  window.csOpen = function(message) {
+    openPanel();
+    if (message) {
+      setTimeout(function() {
+        inp.value = message;
+        send.disabled = false;
+        doSend();
+      }, 400);
+    }
+  };
 
   btn.addEventListener('click', togglePanel);
   close.addEventListener('click', togglePanel);
