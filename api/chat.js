@@ -102,7 +102,7 @@ module.exports = async function handler(req, res) {
   // Fallback si faltan vars (evita crash en preview sin configurar)
   if (!SUPABASE_URL || !SUPABASE_SERVICE_KEY || !OPENAI_API_KEY) {
     return res.status(200).json({
-      reply: '¡Hola! Por ahora puedes contactarnos directamente: WhatsApp +56 9 5265 7719 o al correo saul.constructor25@gmail.com'
+      reply: '¡Hola! Por ahora puedes contactarnos directamente: WhatsApp +56 9 4265 7719 o al correo saul.constructor25@gmail.com'
     });
   }
 
@@ -171,7 +171,7 @@ module.exports = async function handler(req, res) {
       parsed = JSON.parse(oaiData.choices[0].message.content);
     } catch {
       parsed = {
-        reply: 'Disculpa el inconveniente técnico. Para consultas urgentes: +56 9 5265 7719',
+        reply: 'Disculpa el inconveniente técnico. Para consultas urgentes: +56 9 4265 7719',
         intent: 'otro',
         derive_reason: null,
         captured: {},
@@ -257,7 +257,7 @@ module.exports = async function handler(req, res) {
   } catch (err) {
     console.error('[chat.js] Error:', err);
     return res.status(200).json({
-      reply: 'Tuve un problema técnico. Escríbenos directamente al +56 9 5265 7719',
+      reply: 'Tuve un problema técnico. Escríbenos directamente al +56 9 4265 7719',
     });
   }
 };
